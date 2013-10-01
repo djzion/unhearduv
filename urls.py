@@ -9,6 +9,8 @@ admin.autodiscover()
 # You can also change the ``home`` view to add your own functionality
 # to the project's homepage.
 
+from django.conf import settings
+
 urlpatterns = patterns("",
 
     # Change the admin prefix here to use an alternate URL for the
@@ -83,6 +85,11 @@ urlpatterns = patterns("",
     # ("^%s/" % settings.SITE_PREFIX, include("mezzanine.urls"))
 
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('django.contrib.staticfiles.views',
+        url(r'^static/(?P<path>.*)$', 'serve'),
+    )
 
 # Adds ``STATIC_URL`` to the context of error pages, so that error
 # pages can use JS, CSS and images.

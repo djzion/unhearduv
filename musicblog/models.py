@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.core.urlresolvers import reverse
 from mezzanine.core.models import Displayable, RichText
 from mezzanine.core.fields import FileField
 from mezzanine.utils.models import AdminThumbMixin
+from mezzanine.blog.models import BlogPost
+
 
 class Artist(Displayable, RichText, AdminThumbMixin):
     name = models.CharField(max_length=255)
@@ -16,6 +17,7 @@ class Artist(Displayable, RichText, AdminThumbMixin):
     @models.permalink
     def get_absolute_url(self):
         return ('musicblog.views.show_artist', (), {'slug': self.slug})
+
 
 class ArtistLink(models.Model):
     artist = models.ForeignKey(Artist)
@@ -37,6 +39,7 @@ class Venue(Displayable, AdminThumbMixin):
     @models.permalink
     def get_absolute_url(self):
         return ('musicblog.views.show_venue', (), {'slug': self.slug})
+
 
 class Event(Displayable, AdminThumbMixin):
     date = models.DateTimeField()
@@ -61,16 +64,14 @@ class Track(models.Model):
     title = models.CharField(max_length=255)
     file = models.FileField(upload_to='tracks', null=True)
 
+
 class SoundCloudTrack(Track):
     soundcloud_id = models.CharField(max_length=255)
     url = models.URLField()
 
-from mezzanine.blog.models import BlogPost
-from django.contrib.contenttypes.generic import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 
 class MusicBlogPost(BlogPost):
-    content_type = models.ForeignKey(ContentType, null=True)
-    object_id = models.PositiveIntegerField(null=True)
-    subject = GenericForeignKey()
+    artist = models.ForeignKey(Artist, null=True, blank=True)
+    event = models.ForeignKey(Event, null=True, blank=True)
+    track = models.ForeignKey(Track, null=True, blank=True)
     featured = models.BooleanField(default=False)

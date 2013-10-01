@@ -229,6 +229,8 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"
 # Package/module name to import the root urlpatterns from for the project.
 ROOT_URLCONF = "%s.urls" % PROJECT_DIRNAME
 
+THUMBNAILS_DIR_NAME = 'thumbnails'
+
 # Put strings here, like "/home/html/django_templates"
 # or "C:/www/django/templates".
 # Always use forward slashes, even on Windows.
@@ -240,6 +242,7 @@ ROOT_URLCONF = "%s.urls" % PROJECT_DIRNAME
 
 INSTALLED_APPS = (
     "musicblog",
+    'django_admin_bootstrapped',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -257,7 +260,6 @@ INSTALLED_APPS = (
     "mezzanine.pages",
     "mezzanine.galleries",
     "mezzanine.twitter",
-    'genericadmin',
     #"mezzanine.accounts",
     #"mezzanine.mobile",
 )

@@ -43,7 +43,16 @@ class PostSubjectInline(GenericTabularInline):
 class PostAdmin(admin.ModelAdmin):
     content_type_whitelist = ('musicblog/artist', 'musicblog/event', 'musicblog/track' )
 
+
+class TrackAdmin(admin.ModelAdmin):
+    model = Track
+    class Media:
+        js = ("js/admin.js",)
+
+
+
 admin.site.register(Artist, ArtistAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Venue, VenueAdmin)
 admin.site.register(MusicBlogPost, PostAdmin)
+admin.site.register(Track, TrackAdmin)

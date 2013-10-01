@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n mezzanine_tags blog_tags keyword_tags disqus_tags %}
+
+{% block main %}
+    <h1>Events</h1>
+
+    {% for event in events %}
+
+    <h3>{{ event.title }}</h3>
+    <img src="{{ event.featured_image.url }}" />
+    <span class="date">{{ event.date }}</span>
+
+    {% for artist in event.artists.all %}
+        {{ artist.title }}
+    {% endfor %}
+    {{ event.venue.title }}
+
+    {% endfor %}
+
+{% endblock %}

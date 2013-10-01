@@ -1,0 +1,9 @@
+Django==1.5.4
+Mezzanine
+Pillow
+bleach
+filebrowser-safe
+grappelli-safe
+html5lib==0.95
+pytz==2013d
+wsgiref==0.1.2
